@@ -61,6 +61,8 @@ class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), data, Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(v.getContext(),ActivityProduct.class);
+                    v.getContext().startActivity(intent);
 
                 }
             });
