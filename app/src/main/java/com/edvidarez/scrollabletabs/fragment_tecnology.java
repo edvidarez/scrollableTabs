@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ public class fragment_tecnology extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
+    ArrayList<ItemProduct> products = new ArrayList<>();
+    AdapterProduct adapterProduct;
 
     public fragment_tecnology() {
     }
@@ -50,11 +53,10 @@ public class fragment_tecnology extends Fragment {
 
 
         RecyclerView recyclerView = rootView.findViewById(R.id.fragment_recycler_view);
-        ArrayList<ItemProduct> products = new ArrayList<>();
-        products.add(new ItemProduct("Alienware","Best Buy" , "1234567890", 1 , "Guadalajara"));
-        products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan"));
-
-        AdapterProduct adapterProduct = new AdapterProduct(products);
+        products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan",0));
+        products.add(new ItemProduct("Alienware","Best Buy" , "1234567890", 1 , "Guadalajara",1));
+        products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan",2));
+        adapterProduct = new AdapterProduct(products);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapterProduct);
@@ -62,4 +64,12 @@ public class fragment_tecnology extends Fragment {
         // textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
         return rootView;
     }
+
+    public void onChange(ItemProduct product){
+        Integer code = product.getCode();
+        Log.d(ActivityMain.class.getSimpleName(),"Looog");
+        products.set(code,product);
+        adapterProduct.notifyDataSetChanged();
+    }
+
 }

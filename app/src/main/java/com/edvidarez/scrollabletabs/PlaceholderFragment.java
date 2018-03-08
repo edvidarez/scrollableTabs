@@ -55,12 +55,8 @@ public class PlaceholderFragment extends Fragment {
 
         RecyclerView recyclerView = rootView.findViewById(R.id.fragment_recycler_view);
         ArrayList<ItemProduct> products = new ArrayList<>();
-        products.add(new ItemProduct("Alienware","Best Buy" , "1234567890", 1 , "Guadalajara"));
-        products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan"));
-        products.add(new ItemProduct("Alienware","Best Buy" , "1234567890", 1 , "Guadalajara"));
-        products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan"));
-        products.add(new ItemProduct("Alienware","Best Buy" , "1234567890", 1 , "Guadalajara"));
-        products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan"));
+        products.add(new ItemProduct("Alienware","Best Buy" , "1234567890", 1 , "Guadalajara",1));
+        products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan",2));
 
         AdapterProduct adapterProduct = new AdapterProduct(products);
         recyclerView.setHasFixedSize(true);

@@ -1,5 +1,7 @@
 package com.edvidarez.scrollabletabs;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -13,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,22 +31,12 @@ import java.util.ArrayList;
 
 public class ActivityMain extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private ViewPager mViewPager;
-
+    private fragment_tecnology fragmentTecnology;
+    private fragment_electronics fragmentElectronics;
+    private fragment_home fragmentHome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +45,7 @@ public class ActivityMain extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -71,7 +63,23 @@ public class ActivityMain extends AppCompatActivity {
         });
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(ActivityMain.class.getSimpleName(),"result");
+        switch (requestCode){
+            case 9999:
+                if(resultCode == Activity.RESULT_OK){
+                    ItemProduct product = data.getParcelableExtra("Producto");
+                    if(product != null){
+                        Log.d(ActivityMain.class.getSimpleName(),product.getTitle());
+                        fragmentTecnology.onChange(product);
+                    }
+                }
+                break;
 
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -95,15 +103,7 @@ public class ActivityMain extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
 
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -113,16 +113,15 @@ public class ActivityMain extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             switch(position){
-                case 0: return fragment_tecnology.newInstance(position +1);
-                case 1: return fragment_home.newInstance(position +1);
-                case 2: return fragment_electronics.newInstance(position +1);
+                case 0:return (fragmentTecnology==null)?fragmentTecnology = new fragment_tecnology():fragmentTecnology;
+                case 1: return (fragmentHome==null)?fragmentHome = new fragment_home():fragmentHome;
+                case 2: return (fragmentElectronics==null)?fragmentElectronics = new fragment_electronics():fragmentElectronics;
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 3;
         }
 

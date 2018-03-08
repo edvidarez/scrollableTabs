@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.edvidarez.scrollabletabs.beans.ItemProduct;
 
-import org.w3c.dom.Text;
+
 
 import java.util.ArrayList;
 
@@ -47,6 +47,7 @@ class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
         public ImageView mImage;
         public TextView mLocation;
         public String data;
+        public ItemProduct product;
 
 
         public ViewHolder(final View v) {
@@ -60,9 +61,11 @@ class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), data, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(v.getContext(), data, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(v.getContext(),ActivityProduct.class);
-                    v.getContext().startActivity(intent);
+                    intent.putExtra("Producto",product);
+                    ActivityMain main = (ActivityMain) v.getContext();
+                    main.startActivityForResult(intent,9999);
 
                 }
             });
@@ -92,6 +95,8 @@ class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
         holder.mPhone.setText(products.get(position).getNumber());
         holder.data = products.get(position).toString();
         holder.mLocation.setText(products.get(position).getLocation());
+        holder.product = products.get(position);
+
         switch (products.get(position).getImage()){
 
             case 1:
