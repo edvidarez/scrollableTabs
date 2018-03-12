@@ -2,6 +2,7 @@ package com.edvidarez.scrollabletabs;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -96,8 +97,20 @@ public class ActivityMain extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.log_out) {
+
+            Intent intent = new Intent(ActivityMain.this,ActivityLogin.class);
+            SharedPreferences sharedPreferences = getSharedPreferences(Constants.USER_PREFERENCES,MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("LOGGED",false);
+            editor.apply();
+            startActivity(intent);
+            finish();
             return true;
+        }
+        if (id == R.id.privacy_policy){
+            Intent intent = new Intent(ActivityMain.this,ActivityPrivacyPolicy.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
