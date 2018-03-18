@@ -25,8 +25,17 @@ import android.view.ViewGroup;
 
 import android.widget.Adapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.edvidarez.scrollabletabs.beans.Category;
+import com.edvidarez.scrollabletabs.beans.City;
 import com.edvidarez.scrollabletabs.beans.ItemProduct;
+import com.edvidarez.scrollabletabs.beans.Store;
+import com.edvidarez.scrollabletabs.database.CategoryControll;
+import com.edvidarez.scrollabletabs.database.CityController;
+import com.edvidarez.scrollabletabs.database.DataBaseHandler;
+import com.edvidarez.scrollabletabs.database.ItemProductControll;
+import com.edvidarez.scrollabletabs.database.StoreControll;
 
 import java.util.ArrayList;
 
@@ -38,6 +47,10 @@ public class ActivityMain extends AppCompatActivity {
     private fragment_tecnology fragmentTecnology;
     private fragment_electronics fragmentElectronics;
     private fragment_home fragmentHome;
+    CityController cityController;
+    StoreControll storeControll;
+    CategoryControll categoryControll;
+    ItemProductControll productControll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +75,27 @@ public class ActivityMain extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        DataBaseHandler dh = DataBaseHandler.getInstance(ActivityMain.this);
+        cityController = new CityController();
+        categoryControll = new CategoryControll();
+        storeControll = new StoreControll();
+
+        //cityController.addCity(guadalajara,dh);
+        ArrayList<Category> categories = categoryControll.getCategories(dh);
+        ArrayList<Store> tiendas = storeControll.getStores(dh);
+        for(Store t:tiendas){
+            Toast.makeText(ActivityMain.this,t.toString(),Toast.LENGTH_LONG).show();
+        }
+        Store walmartDos = storeControll.getStoresByID(2,dh);
+        //Toast.makeText(ActivityMain.this,walmartDos.toString(),Toast.LENGTH_LONG).show();
+        Category electronics = categoryControll.getCategoryByID(1,dh);
+        productControll = new ItemProductControll();
+        //ItemProduct product = new ItemProduct(8,"Producto de prueba 3","Descripcion del producto de prueba 3",1,laWalmart,electronics);
+        //productControll.addProduct(product,dh);
+        ArrayList<ItemProduct> products = productControll.getProductsByCategory(electronics.getId(),dh);
+        for(ItemProduct p : products){
+            Toast.makeText(ActivityMain.this,p.toString(),Toast.LENGTH_LONG).show();
+        }
 
     }
     @Override

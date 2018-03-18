@@ -51,6 +51,7 @@ public class fragment_electronics extends Fragment {
 
         RecyclerView recyclerView = rootView.findViewById(R.id.fragment_recycler_view);
         ArrayList<ItemProduct> products = new ArrayList<>();
+        /*
         products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan",0));
         products.add(new ItemProduct("Alienware","Best Buy" , "1234567890", 1 , "Guadalajara",1));
         products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan",2));
@@ -60,7 +61,7 @@ public class fragment_electronics extends Fragment {
         products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan",6));
         products.add(new ItemProduct("Alienware","Best Buy" , "1234567890", 1 , "Guadalajara",7));
         products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan",8));
-
+    */
         AdapterProduct adapterProduct = new AdapterProduct(products);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);

@@ -50,19 +50,21 @@ public class ActivityProduct extends AppCompatActivity {
                         break;
                 }
                 title.setText(product.getTitle());
-                store.setText(product.getStore());
-                location.setText(product.getLocation());
-                phone.setText(product.getNumber());
+                //store.setText(product.getStore());
+                //location.setText(product.getLocation());
+                //phone.setText(product.getNumber());
             }
         }
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 product.setTitle(title.getText().toString());
+
                 product.setStore(store.getText().toString());
                 product.setLocation(location.getText().toString());
                 product.setNumber(phone.getText().toString());
-
+                */
 
                 Log.d(ActivityMain.class.getSimpleName(),"Looog");
 

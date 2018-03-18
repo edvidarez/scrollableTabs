@@ -90,6 +90,7 @@ class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        /*
         holder.mTitle.setText(products.get(position).getTitle());
         holder.mStore.setText(products.get(position).getStore());
         holder.mPhone.setText(products.get(position).getNumber());
@@ -109,7 +110,7 @@ class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
                 holder.mImage.setImageResource(R.drawable.bestbuy);
                 break;
         }
-
+    */
     }
 
     @Override

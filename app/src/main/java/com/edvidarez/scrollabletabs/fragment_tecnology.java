@@ -53,9 +53,11 @@ public class fragment_tecnology extends Fragment {
 
 
         RecyclerView recyclerView = rootView.findViewById(R.id.fragment_recycler_view);
+        /*
         products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan",0));
         products.add(new ItemProduct("Alienware","Best Buy" , "1234567890", 1 , "Guadalajara",1));
         products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan",2));
+        */
         adapterProduct = new AdapterProduct(products);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);
