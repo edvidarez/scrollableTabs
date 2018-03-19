@@ -39,9 +39,9 @@ public class ItemProductControll {
 
     public ArrayList<ItemProduct> getProductsByCategory(int idCategory,DataBaseHandler dh){
         ArrayList<ItemProduct> products = new ArrayList<>();
-        String select = "SELECT p.idproduct, p.title, p.image, p.description, c.id, c.name "+
-                "FROM Product p, Category c " +
-                "WHERE p.idcategory = c.id AND c.id = "+idCategory;
+        String select = "SELECT p.idproduct, p.title, p.image, p.description, c.id, c.name, sp.idstore "+
+                "FROM Product p, Category c, StoreProduct sp " +
+                "WHERE sp.idproduct = p.idproduct AND p.idcategory = c.id AND c.id = "+idCategory;
                 //"INNER JOIN StoreProduct ON Product.idproduct = StoreProduct.idproduct " +
                 //"INNER JOIN Store ON StoreProduct.idstore = Store.id " +
                 //"INNER JOIN City ON Store.idcity = City.id " ;
@@ -50,7 +50,7 @@ public class ItemProductControll {
                 */
             SQLiteDatabase db = dh.getReadableDatabase();
             Cursor cursor = db.rawQuery(select, null);
-
+        StoreControll storeControll = new StoreControll();
         while(cursor.moveToNext()) {
             ItemProduct itemProduct = new ItemProduct();
             itemProduct.setCode(cursor.getInt(0 ));
@@ -59,10 +59,12 @@ public class ItemProductControll {
             itemProduct.setDescription(cursor.getString(3));
 
             Category category = new Category();
-            category.setId(cursor.getInt(5));
+            category.setId(cursor.getInt(4));
             category.setName(cursor.getString(5));
             itemProduct.setCategory(category);
 
+            Store store = storeControll.getStoresByID(cursor.getInt(6),dh);
+            itemProduct.setStore(store);
             products.add(itemProduct);
         }
         try {
@@ -76,5 +78,44 @@ public class ItemProductControll {
         return products;
     }
 
+    public ArrayList<ItemProduct> getProducts(DataBaseHandler dh){
+        ArrayList<ItemProduct> products = new ArrayList<>();
+        String select = "SELECT p.idproduct, p.title, p.image, p.description, c.id, c.name, sp.idstore "+
+                "FROM Product p, Category c, StoreProduct sp " +
+                "WHERE sp.idproduct = p.idproduct AND p.idcategory = c.id " ;
+        //"INNER JOIN StoreProduct ON Product.idproduct = StoreProduct.idproduct " +
+        //"INNER JOIN Store ON StoreProduct.idstore = Store.id " +
+        //"INNER JOIN City ON Store.idcity = City.id " ;
+                /*+
+                "WHERE Product.idcategory = " + idCategory;
+                */
+        SQLiteDatabase db = dh.getReadableDatabase();
+        Cursor cursor = db.rawQuery(select, null);
+        StoreControll storeControll = new StoreControll();
+        while(cursor.moveToNext()) {
+            ItemProduct itemProduct = new ItemProduct();
+            itemProduct.setCode(cursor.getInt(0 ));
+            itemProduct.setTitle(cursor.getString(1));
+            itemProduct.setImage(cursor.getInt(2));
+            itemProduct.setDescription(cursor.getString(3));
 
+            Category category = new Category();
+            category.setId(cursor.getInt(4));
+            category.setName(cursor.getString(5));
+            itemProduct.setCategory(category);
+
+            Store store = storeControll.getStoresByID(cursor.getInt(6),dh);
+            itemProduct.setStore(store);
+            products.add(itemProduct);
+        }
+        try {
+            cursor.close();
+            db.close();
+        }catch (Exception e) {
+        }
+
+        cursor = null;
+        db = null;
+        return products;
+    }
 }

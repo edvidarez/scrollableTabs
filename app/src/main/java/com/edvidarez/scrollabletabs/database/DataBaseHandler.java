@@ -66,10 +66,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         for (String createTable:tables) {
             db.execSQL(createTable);
         }
-        String[] categories = {"Tecnolgy","Home","Electronics"};
-        for(int i=0;i<categories.length;i++){
-            db.execSQL("INSERT INTO Category (id,name) VALUES("+i+1+",'"+categories[i]+"')");
-        }
+
 
     }
 

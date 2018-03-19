@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.edvidarez.scrollabletabs.ActivityItem">
+    <Spinner
+        android:id="@+id/ActivityItemImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Spinner>
+    <EditText
+        android:hint="Titulo"
+        android:id="@+id/ActivityItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Spinner
+        android:id="@+id/ActivityItemCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Spinner>
+    <Spinner
+        android:id="@+id/ActivityItemStore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Spinner>
+    <Button
+        android:id="@+id/ActivityItemSave"
+        android:layout_width="match_parent"
+        android:onClick="Save"
+        android:layout_gravity="bottom"
+        android:text="@string/guardar"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

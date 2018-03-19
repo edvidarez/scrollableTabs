@@ -71,10 +71,11 @@ public class ActivityMain extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(ActivityMain.this,ActivityItem.class);
+                startActivity(intent);
             }
         });
+        /*
         DataBaseHandler dh = DataBaseHandler.getInstance(ActivityMain.this);
         cityController = new CityController();
         categoryControll = new CategoryControll();
@@ -88,7 +89,7 @@ public class ActivityMain extends AppCompatActivity {
         }
         Store walmartDos = storeControll.getStoresByID(2,dh);
         //Toast.makeText(ActivityMain.this,walmartDos.toString(),Toast.LENGTH_LONG).show();
-        Category electronics = categoryControll.getCategoryByID(1,dh);
+        Category electronics = categoryControll.getCategoryByID(0,dh);
         productControll = new ItemProductControll();
         //ItemProduct product = new ItemProduct(8,"Producto de prueba 3","Descripcion del producto de prueba 3",1,laWalmart,electronics);
         //productControll.addProduct(product,dh);
@@ -96,6 +97,7 @@ public class ActivityMain extends AppCompatActivity {
         for(ItemProduct p : products){
             Toast.makeText(ActivityMain.this,p.toString(),Toast.LENGTH_LONG).show();
         }
+        */
 
     }
     @Override

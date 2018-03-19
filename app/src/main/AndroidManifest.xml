@@ -31,7 +31,8 @@
         <activity
             android:name=".ActivityLogin"
             android:label="@string/title_activity_login" />
-        <activity android:name=".ActivityPrivacyPolicy"></activity>
+        <activity android:name=".ActivityPrivacyPolicy" />
+        <activity android:name=".ActivityItem"></activity>
     </application>
 
 </manifest>

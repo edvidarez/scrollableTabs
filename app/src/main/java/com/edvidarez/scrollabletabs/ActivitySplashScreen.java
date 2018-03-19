@@ -5,11 +5,17 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.edvidarez.scrollabletabs.beans.Category;
 import com.edvidarez.scrollabletabs.beans.City;
+import com.edvidarez.scrollabletabs.beans.ItemProduct;
 import com.edvidarez.scrollabletabs.beans.Store;
+import com.edvidarez.scrollabletabs.beans.StoreProduct;
+import com.edvidarez.scrollabletabs.database.CategoryControll;
 import com.edvidarez.scrollabletabs.database.CityController;
 import com.edvidarez.scrollabletabs.database.DataBaseHandler;
+import com.edvidarez.scrollabletabs.database.ItemProductControll;
 import com.edvidarez.scrollabletabs.database.StoreControll;
+import com.edvidarez.scrollabletabs.database.StoreProductControll;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -41,6 +47,9 @@ public class ActivitySplashScreen extends AppCompatActivity {
                 DataBaseHandler dh = DataBaseHandler.getInstance(ActivitySplashScreen.this);
                 StoreControll storeControll = new StoreControll();
                 CityController cityController = new CityController();
+                ItemProductControll itemProductControll = new ItemProductControll();
+                CategoryControll categoryControll = new CategoryControll();
+                StoreProductControll storeProductControll = new StoreProductControll();
                 ArrayList<Store> stores =  storeControll.getStores(dh);
                 if(stores.size()==0) {
                     //add 3
@@ -55,6 +64,24 @@ public class ActivitySplashScreen extends AppCompatActivity {
                     storeControll.addStore(laWalmartGdl, dh);
                     storeControll.addStore(laWalmartZpn, dh);
                     storeControll.addStore(ebay, dh);
+                    Category electronic = new Category(0,"Electronics");
+                    Category home = new Category(1,"Home");
+                    Category tecnology = new Category(2,"Tecnology");
+                    categoryControll.addCategory(electronic,dh);
+                    categoryControll.addCategory(home,dh);
+                    categoryControll.addCategory(tecnology,dh);
+                    ItemProduct mac = new ItemProduct(1,"Mac","Mac 2018",2,laWalmartGdl,electronic);
+                    ItemProduct alienware = new ItemProduct(2,"AlienWare","Alienware 2018",1,laWalmartGdl,electronic);
+                    itemProductControll.addProduct(mac,dh);
+                    itemProductControll.addProduct(alienware,dh);
+
+                    StoreProduct sp = new StoreProduct(1,mac.getCode(),laWalmartGdl.getId());
+                    StoreProduct sp2 = new StoreProduct(2,alienware.getCode(),laWalmartZpn.getId());
+                    storeProductControll.addStoreProduct(sp,dh);
+                    storeProductControll.addStoreProduct(sp2,dh);
+
+
+
 
                 }
                 startActivity(mainIntent);

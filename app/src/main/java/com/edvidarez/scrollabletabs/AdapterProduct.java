@@ -90,12 +90,14 @@ class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        /*
+
         holder.mTitle.setText(products.get(position).getTitle());
-        holder.mStore.setText(products.get(position).getStore());
-        holder.mPhone.setText(products.get(position).getNumber());
+        //products.get(position).getStore().getName(),products.get(position).getStore().getPhone()
+        holder.mStore.setText(products.get(position).getStore().getName());
+        holder.mPhone.setText(products.get(position).getStore().getPhone());
         holder.data = products.get(position).toString();
-        holder.mLocation.setText(products.get(position).getLocation());
+        double latitude = products.get(position).getStore().getLatitude();
+        holder.mLocation.setText(String.valueOf(latitude));
         holder.product = products.get(position);
 
         switch (products.get(position).getImage()){
@@ -110,7 +112,7 @@ class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
                 holder.mImage.setImageResource(R.drawable.bestbuy);
                 break;
         }
-    */
+
     }
 
     @Override

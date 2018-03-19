@@ -14,10 +14,7 @@ public class Category implements Parcelable {
 
     @Override
     public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return name;
     }
 
     public int getId() {

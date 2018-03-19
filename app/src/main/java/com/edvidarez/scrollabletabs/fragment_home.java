@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.edvidarez.scrollabletabs.beans.ItemProduct;
+import com.edvidarez.scrollabletabs.database.DataBaseHandler;
+import com.edvidarez.scrollabletabs.database.ItemProductControll;
 
 import java.util.ArrayList;
 
@@ -50,7 +52,13 @@ public class fragment_home extends Fragment {
 
 
         RecyclerView recyclerView = rootView.findViewById(R.id.fragment_recycler_view);
-        ArrayList<ItemProduct> products = new ArrayList<>();
+
+
+
+        ArrayList<ItemProduct> products ;
+        ItemProductControll itemProductControll = new ItemProductControll();
+        DataBaseHandler dh = DataBaseHandler.getInstance(this.getContext());
+        products = itemProductControll.getProductsByCategory(1,dh);
         /*
         products.add(new ItemProduct("Alienware","Best Buy" , "1234567890", 1 , "Guadalajara",1));
         products.add(new ItemProduct("mac","Best Buy" , "1234567890", 2 , "Zapopan",2));
