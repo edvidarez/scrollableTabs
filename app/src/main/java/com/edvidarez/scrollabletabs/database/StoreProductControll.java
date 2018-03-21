@@ -32,6 +32,23 @@ public class StoreProductControll {
 
     }
 
+    public int getSize(DataBaseHandler dh){
+        int count = 0;
+        String select = "SELECT * FROM StoreProduct";
+        SQLiteDatabase db = dh.getReadableDatabase();
+        Cursor cursor = db.rawQuery(select, null);
+        while(cursor.moveToNext()){
+            count++;
+        }
+        try{
+            cursor.close(); //Siempre cerrar primero el cursor
+            db.close();
+        }catch(Exception e){
+        }
+        db = null;
+        cursor = null;
+        return count;
+    }
 
 
 }

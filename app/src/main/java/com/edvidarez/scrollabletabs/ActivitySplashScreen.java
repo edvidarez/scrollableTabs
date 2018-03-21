@@ -70,8 +70,8 @@ public class ActivitySplashScreen extends AppCompatActivity {
                     categoryControll.addCategory(electronic,dh);
                     categoryControll.addCategory(home,dh);
                     categoryControll.addCategory(tecnology,dh);
-                    ItemProduct mac = new ItemProduct(1,"Mac","Mac 2018",2,laWalmartGdl,electronic);
-                    ItemProduct alienware = new ItemProduct(2,"AlienWare","Alienware 2018",1,laWalmartGdl,electronic);
+                    ItemProduct mac = new ItemProduct(1,"Mac","Mac 2018",2,laWalmartGdl,tecnology);
+                    ItemProduct alienware = new ItemProduct(2,"AlienWare","Alienware 2018",1,laWalmartGdl,tecnology);
                     itemProductControll.addProduct(mac,dh);
                     itemProductControll.addProduct(alienware,dh);
 

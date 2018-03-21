@@ -8,6 +8,7 @@ import com.edvidarez.scrollabletabs.beans.Category;
 import com.edvidarez.scrollabletabs.beans.City;
 import com.edvidarez.scrollabletabs.beans.ItemProduct;
 import com.edvidarez.scrollabletabs.beans.Store;
+import com.edvidarez.scrollabletabs.beans.StoreProduct;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 public class ItemProductControll {
 
     public void addProduct(ItemProduct product, DataBaseHandler dh){
+        StoreProductControll storeProductControll = new StoreProductControll();
+
         SQLiteDatabase db = dh.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("idproduct", product.getCode());
@@ -26,6 +29,15 @@ public class ItemProductControll {
         values.put("idcategory",product.getCategory().getId());
         values.put("description",product.getDescription());
         db.insert("Product", null, values);
+        int size = storeProductControll.getSize(dh);
+
+        StoreProduct storeProduct = new StoreProduct();
+        storeProduct.setId(size+1);
+        storeProduct.setIdproduct(product.getCode());
+        storeProduct.setIdstore(product.getStore().getId());
+        storeProductControll.addStoreProduct(storeProduct,dh);
+
+
         try{
             db.close();
         }catch(Exception e){

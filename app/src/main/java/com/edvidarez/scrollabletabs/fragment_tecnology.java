@@ -62,7 +62,7 @@ public class fragment_tecnology extends Fragment {
         */
         ItemProductControll itemProductControll = new ItemProductControll();
         DataBaseHandler dh = DataBaseHandler.getInstance(this.getContext());
-        products = itemProductControll.getProductsByCategory(0,dh);
+        products = itemProductControll.getProductsByCategory(2,dh);
 
         adapterProduct = new AdapterProduct(products);
         recyclerView.setHasFixedSize(true);

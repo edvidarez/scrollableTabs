@@ -102,6 +102,9 @@ class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
 
         switch (products.get(position).getImage()){
 
+            case 0:
+                holder.mImage.setImageResource(R.drawable.mac);
+                break;
             case 1:
                 holder.mImage.setImageResource(R.drawable.alienware);
                 break;

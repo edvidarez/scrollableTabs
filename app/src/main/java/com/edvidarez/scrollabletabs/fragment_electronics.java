@@ -55,7 +55,7 @@ public class fragment_electronics extends Fragment {
         ArrayList<ItemProduct> products ;
         ItemProductControll itemProductControll = new ItemProductControll();
         DataBaseHandler dh = DataBaseHandler.getInstance(this.getContext());
-        products = itemProductControll.getProductsByCategory(2,dh);
+        products = itemProductControll.getProductsByCategory(0,dh);
         AdapterProduct adapterProduct = new AdapterProduct(products);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);

@@ -3,6 +3,7 @@ package com.edvidarez.scrollabletabs;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ public class ActivityItem extends AppCompatActivity {
     Spinner categories,stores, images;
     ArrayList<Category> categoriesArray;
     ArrayList<Store> storesArray;
+    ArrayList<String> imagesArray;
     DataBaseHandler dh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +44,21 @@ public class ActivityItem extends AppCompatActivity {
 
         categoriesArray = categoryControll.getCategories(dh);
         storesArray = storeControll.getStores(dh);
+        imagesArray = new ArrayList<String>();
+        imagesArray.add("Mac");
+        imagesArray.add("AlienWare");
 
         ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(getApplicationContext(), android.R.layout.simple_list_item_1, categoriesArray);
         ArrayAdapter<Store>  storeAdapter = new ArrayAdapter<Store>(getApplicationContext(),android.R.layout.simple_list_item_1,storesArray);
+        ArrayAdapter<String> imagesAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,imagesArray);
         //adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 
         categories.setAdapter(categoryAdapter);
         stores.setAdapter(storeAdapter);
-        stores.setSelection(0);
+        images.setAdapter(imagesAdapter);
         stores.setBackgroundColor(Color.GRAY);
         categories.setBackgroundColor(Color.GRAY);
+        images.setBackgroundColor(Color.GRAY);
 
     }
     public void Save(View view){
@@ -59,8 +66,12 @@ public class ActivityItem extends AppCompatActivity {
         Store store = (Store) stores.getSelectedItem();
         ItemProductControll itemProductControll = new ItemProductControll();
         ArrayList<ItemProduct> products = itemProductControll.getProducts(dh);
-        ItemProduct product = new ItemProduct(products.size()+1,title.getText().toString(),"",1,store,category);
+        Log.d("debugg","El size es "+products.size());
+        int imageIndex = images.getSelectedItemPosition();
+        ItemProduct product = new ItemProduct(products.size()+1,title.getText().toString(),"",imageIndex,store,category);
+        Log.d("debugg",product.toString());
         itemProductControll.addProduct(product,dh);
+
         finish();
     }
 }
