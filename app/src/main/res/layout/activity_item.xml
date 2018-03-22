@@ -12,7 +12,7 @@
 
     </Spinner>
     <EditText
-        android:hint="Titulo"
+        android:hint="@string/titulo"
         android:id="@+id/ActivityItemTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -28,13 +28,19 @@
         android:layout_height="wrap_content">
 
     </Spinner>
-    <Button
-        android:id="@+id/ActivityItemSave"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:onClick="Save"
-        android:layout_gravity="bottom"
-        android:text="@string/guardar"
-        android:layout_height="wrap_content" />
+        android:layout_height="@dimen/zero"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/ActivityItemSave"
+            android:layout_width="match_parent"
+            android:onClick="Save"
+            android:layout_gravity="bottom"
+            android:text="@string/guardar"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 
 
 </LinearLayout>
