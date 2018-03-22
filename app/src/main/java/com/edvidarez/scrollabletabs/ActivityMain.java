@@ -51,11 +51,12 @@ public class ActivityMain extends AppCompatActivity {
     StoreControll storeControll;
     CategoryControll categoryControll;
     ItemProductControll productControll;
+    DataBaseHandler dh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        dh = DataBaseHandler.getInstance(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         setSupportActionBar(toolbar);
@@ -72,33 +73,10 @@ public class ActivityMain extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ActivityMain.this,ActivityItem.class);
-                startActivity(intent);
+                startActivityForResult(intent,12);
+
             }
         });
-        /*
-        DataBaseHandler dh = DataBaseHandler.getInstance(ActivityMain.this);
-        cityController = new CityController();
-        categoryControll = new CategoryControll();
-        storeControll = new StoreControll();
-
-        //cityController.addCity(guadalajara,dh);
-        ArrayList<Category> categories = categoryControll.getCategories(dh);
-        ArrayList<Store> tiendas = storeControll.getStores(dh);
-        for(Store t:tiendas){
-            Toast.makeText(ActivityMain.this,t.toString(),Toast.LENGTH_LONG).show();
-        }
-        Store walmartDos = storeControll.getStoresByID(2,dh);
-        //Toast.makeText(ActivityMain.this,walmartDos.toString(),Toast.LENGTH_LONG).show();
-        Category electronics = categoryControll.getCategoryByID(0,dh);
-        productControll = new ItemProductControll();
-        //ItemProduct product = new ItemProduct(8,"Producto de prueba 3","Descripcion del producto de prueba 3",1,laWalmart,electronics);
-        //productControll.addProduct(product,dh);
-        ArrayList<ItemProduct> products = productControll.getProductsByCategory(electronics.getId(),dh);
-        for(ItemProduct p : products){
-            Toast.makeText(ActivityMain.this,p.toString(),Toast.LENGTH_LONG).show();
-        }
-        */
-
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -111,6 +89,33 @@ public class ActivityMain extends AppCompatActivity {
                     if(product != null){
                         Log.d(ActivityMain.class.getSimpleName(),product.getTitle());
                         fragmentTecnology.onChange(product);
+                    }
+                }
+                break;
+            case 12:
+                if(resultCode == Activity.RESULT_OK){
+                    ArrayList<ItemProduct> products ;
+                    ItemProductControll itemProductControll = new ItemProductControll();
+                    switch (data.getIntExtra("category",-1)){
+
+                        case 0:
+                            if(fragmentTecnology!= null) {
+                                ItemProduct product = data.getParcelableExtra("product");
+                                fragmentTecnology.onChange(product);
+                            }
+                            break;
+                        case 1:
+                            if(fragmentHome != null) {
+                                ItemProduct product = data.getParcelableExtra("product");
+                                fragmentHome.onChange(product);
+                            }
+                            break;
+                        case 2:
+                            if(fragmentElectronics != null) {
+                                ItemProduct product = data.getParcelableExtra("product");
+                                fragmentElectronics.onChange(product);
+                            }
+                            break;
                     }
                 }
                 break;

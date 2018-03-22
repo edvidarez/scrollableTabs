@@ -27,7 +27,7 @@ public class fragment_tecnology extends Fragment {
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
     ArrayList<ItemProduct> products = new ArrayList<>();
-    AdapterProduct adapterProduct;
+    public AdapterProduct adapterProduct;
 
     public fragment_tecnology() {
     }
@@ -74,9 +74,7 @@ public class fragment_tecnology extends Fragment {
     }
 
     public void onChange(ItemProduct product){
-        Integer code = product.getCode();
-        Log.d(ActivityMain.class.getSimpleName(),"Looog");
-        products.set(code,product);
+        products.add(product);
         adapterProduct.notifyDataSetChanged();
     }
 

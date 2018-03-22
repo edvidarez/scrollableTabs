@@ -25,7 +25,8 @@ public class fragment_electronics extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
-
+    public AdapterProduct adapterProduct;
+    ArrayList<ItemProduct> products ;
     public fragment_electronics() {
     }
 
@@ -52,16 +53,20 @@ public class fragment_electronics extends Fragment {
 
 
         RecyclerView recyclerView = rootView.findViewById(R.id.fragment_recycler_view);
-        ArrayList<ItemProduct> products ;
+
         ItemProductControll itemProductControll = new ItemProductControll();
         DataBaseHandler dh = DataBaseHandler.getInstance(this.getContext());
         products = itemProductControll.getProductsByCategory(0,dh);
-        AdapterProduct adapterProduct = new AdapterProduct(products);
+        adapterProduct = new AdapterProduct(products);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapterProduct);
         // TextView textView = (TextView) rootView.findViewById(R.id.section_label);
         // textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
         return rootView;
+    }
+    public void onChange(ItemProduct product){
+        products.add(product);
+        adapterProduct.notifyDataSetChanged();
     }
 }

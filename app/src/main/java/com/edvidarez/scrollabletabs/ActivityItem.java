@@ -1,5 +1,6 @@
 package com.edvidarez.scrollabletabs;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,17 +49,17 @@ public class ActivityItem extends AppCompatActivity {
         imagesArray.add("Mac");
         imagesArray.add("AlienWare");
 
-        ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(getApplicationContext(), android.R.layout.simple_list_item_1, categoriesArray);
-        ArrayAdapter<Store>  storeAdapter = new ArrayAdapter<Store>(getApplicationContext(),android.R.layout.simple_list_item_1,storesArray);
-        ArrayAdapter<String> imagesAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,imagesArray);
+        ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_list_item_1, categoriesArray);
+        ArrayAdapter<Store>  storeAdapter = new ArrayAdapter<Store>(this,android.R.layout.simple_list_item_1,storesArray);
+        ArrayAdapter<String> imagesAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,imagesArray);
         //adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 
         categories.setAdapter(categoryAdapter);
         stores.setAdapter(storeAdapter);
         images.setAdapter(imagesAdapter);
-        stores.setBackgroundColor(Color.GRAY);
-        categories.setBackgroundColor(Color.GRAY);
-        images.setBackgroundColor(Color.GRAY);
+        //stores.setBackgroundColor(Color.GRAY);
+        //categories.setBackgroundColor(Color.GRAY);
+        //images.setBackgroundColor(Color.GRAY);
 
     }
     public void Save(View view){
@@ -71,7 +72,10 @@ public class ActivityItem extends AppCompatActivity {
         ItemProduct product = new ItemProduct(products.size()+1,title.getText().toString(),"",imageIndex,store,category);
         Log.d("debugg",product.toString());
         itemProductControll.addProduct(product,dh);
-
+        Intent intent = new Intent();
+        intent.putExtra("category",categories.getSelectedItemPosition());
+        intent.putExtra("product",product);
+        setResult(RESULT_OK, intent);
         finish();
     }
 }
